@@ -33,7 +33,7 @@ jobs:
       - run: npm install -g yarn
       - run: yarn install --frozen-lockfile --no-progress
       - run: |
-          NEW_VERSION=$(echo ${{ github.event.GITHUB_REF }} | sed -e 's/^refs\/tags\/v//')
+          NEW_VERSION=$(echo ${{ github.ref }} | sed -e 's/^refs\/tags\/v//')
           TAG=$(if [[ "$NEW_VERSION" == *"-"* ]]; then echo "prelease"; else echo "latest"; fi)
           yarn publish --new-version $NEW_VERSION --tag $TAG --no-git-tag-version
         env:
