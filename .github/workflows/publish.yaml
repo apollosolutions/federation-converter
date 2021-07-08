@@ -37,7 +37,7 @@ jobs:
           echo $(if [[ "$NEW_VERSION" == *"-"* ]]; then echo "prelease"; else echo "latest"; fi)
       - run: |
           NEW_VERSION=$(echo ${{ github.ref }} | sed -e 's/^refs\/tags\/v//')
-          secho $(if [[ "$NEW_VERSION" =~ .*"-".* ]]; then echo "prelease"; else echo "latest"; fi)
+          echo $(if [[ "$NEW_VERSION" =~ .*"-".* ]]; then echo "prelease"; else echo "latest"; fi)
       - run: |
           NEW_VERSION=$(echo ${{ github.ref }} | sed -e 's/^refs\/tags\/v//')
           TAG=$(if [[ "$NEW_VERSION" == *"-"* ]]; then echo "prelease"; else echo "latest"; fi)
