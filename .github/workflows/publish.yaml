@@ -24,16 +24,16 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14.16.1
-          registry-url: https://npm.pkg.github.com/
-      - run: npm install -g yarn
-      - run: yarn install --frozen-lockfile --no-progress
-      - run: |
-          NEW_VERSION=$(echo ${{ github.event.GITHUB_REF }} | sed -e 's/^v//')
-          yarn version $NEW_VERSION --new-version --no-git-tag-version
-      - run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo ${{ github.event.GITHUB_REF }}
+      # - uses: actions/checkout@v2
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: 14.16.1
+      #     registry-url: https://npm.pkg.github.com/
+      # - run: npm install -g yarn
+      # - run: yarn install --frozen-lockfile --no-progress
+      # - run: |
+      #     NEW_VERSION=$(echo ${{ github.event.GITHUB_REF }} | sed -e 's/^v//')
+      #     yarn publish --new-version $NEW_VERSION --no-git-tag-version
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
