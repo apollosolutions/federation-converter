@@ -1,9 +1,15 @@
 {
-  "name": "federation-converter",
+  "name": "@apollosolutions/federation-converter",
   "version": "0.1.0",
   "type": "module",
   "license": "MIT",
-  "bin": "./src/index.js",
+  "bin": "./bin/cli.js",
+  "main": "src/index.js",
+  "typings": "src/index.d.ts",
+  "files": [
+    "bin/*",
+    "src/*"
+  ],
   "dependencies": {
     "@apollo/federation": "^0.24.0",
     "@graphql-tools/utils": "^7.9.1",
@@ -23,6 +29,10 @@
     "node": ">=14.16.1"
   },
   "scripts": {
-    "test": "node --experimental-vm-modules $(yarn bin)/jest"
+    "test": "node --experimental-vm-modules $(yarn bin)/jest",
+    "prepublishOnly": "tsc -p tsconfig.build.json"
+  },
+  "publishConfig": {
+    "@apollosolutions:registry": "https://npm.pkg.github.com"
   }
 }
