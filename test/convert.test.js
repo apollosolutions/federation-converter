@@ -38,6 +38,10 @@ test("fromFederatedSDLToValidSDL", async () => {
 
     directive @provides(fields: String!) on FIELD_DEFINITION
 
+    directive @inaccessible on FIELD_DEFINITION
+
+    directive @tag(name: String!) repeatable on FIELD_DEFINITION
+
     directive @core(feature: String!) repeatable on SCHEMA
 
     directive @custom on FIELD_DEFINITION

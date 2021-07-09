@@ -11,7 +11,7 @@
     "src/*"
   ],
   "dependencies": {
-    "@apollo/federation": "^0.24.0",
+    "@apollo/federation": "^0.26.0",
     "@graphql-tools/utils": "^7.9.1",
     "get-stdin": "^9.0.0",
     "graphql": "^15.5.0",
@@ -19,9 +19,9 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
-    "@types/node": "^15.0.2",
+    "@types/node": "^16.0.3",
     "graphql-schema-linter": "^2.0.1",
-    "jest": "^26.6.3",
+    "jest": "^27.0.6",
     "prettier": "^2.2.1",
     "typescript": "^4.2.4"
   },
