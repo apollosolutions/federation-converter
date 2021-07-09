@@ -34,12 +34,6 @@ jobs:
       - run: yarn install --frozen-lockfile --no-progress
       - run: |
           NEW_VERSION=$(echo ${{ github.ref }} | sed -e 's/^refs\/tags\/v//')
-          echo $(if [[ "$NEW_VERSION" == *"-"* ]]; then echo "prelease"; else echo "latest"; fi)
-      - run: |
-          NEW_VERSION=$(echo ${{ github.ref }} | sed -e 's/^refs\/tags\/v//')
-          echo $(if [[ "$NEW_VERSION" =~ .*"-".* ]]; then echo "prelease"; else echo "latest"; fi)
-      - run: |
-          NEW_VERSION=$(echo ${{ github.ref }} | sed -e 's/^refs\/tags\/v//')
           TAG=$(if [[ "$NEW_VERSION" == *"-"* ]]; then echo "prelease"; else echo "latest"; fi)
           yarn publish --new-version $NEW_VERSION --tag $TAG --no-git-tag-version --access public
         env:

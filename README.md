@@ -57,5 +57,14 @@ adding a [configuration file][config] with these settings:
 - Line numbers change completely, so the schema linting report won't accurately
   reference lines and columns in the original file.
 - Applied directives are stripped when converting a valid schema to a federated
-  one with `--fromValid`. This is currently the expected behavior with federated
+  one with `--from-valid`. This is currently the expected behavior with federated
   graphs.
+- Currently published only to GitHub and GitHub's NPM Registry. Installing NPM
+  packages from GitHub requires a authenticating NPM with a Personal Access Token,
+  [as documented here](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-to-github-packages).
+
+```sh
+echo "//npm.pkg.github.com/:_authToken=$GITHUB_PAT" >> ~/.npmrc
+echo "@apollosolutions:registry=https://npm.pkg.github.com" >> .npmrc
+npm i @apollosolutions/federation-converter
+```
