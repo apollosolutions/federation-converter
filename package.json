@@ -11,7 +11,7 @@
     "src/*"
   ],
   "dependencies": {
-    "@apollo/federation": "^0.26.0",
+    "@apollo/subgraph": "^0.1.5",
     "@graphql-tools/utils": "^7.9.1",
     "get-stdin": "^9.0.0",
     "graphql": "^15.5.0",
