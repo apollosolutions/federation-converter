@@ -6,7 +6,9 @@ import {
 test("fromFederatedSDLToValidSDL", async () => {
   expect(
     fromFederatedSDLToValidSDL(`
-    schema @core(feature: "http://specs.apollo.dev/core/v0.1") {
+    directive @myDirective on SCHEMA
+
+    schema @myDirective {
       query: Query
     }
 
@@ -19,12 +21,12 @@ test("fromFederatedSDLToValidSDL", async () => {
       username: String! @custom
     }
 
-    directive @core(feature: String!) repeatable on SCHEMA 
+    directive @core(feature: String!) repeatable on SCHEMA
 
     directive @custom on FIELD_DEFINITION
   `)
   ).toMatchInlineSnapshot(`
-    "schema @core(feature: \\"http://specs.apollo.dev/core/v0.1\\") {
+    "schema @myDirective {
       query: Query
     }
 
@@ -38,9 +40,7 @@ test("fromFederatedSDLToValidSDL", async () => {
 
     directive @provides(fields: String!) on FIELD_DEFINITION
 
-    directive @inaccessible on FIELD_DEFINITION
-
-    directive @tag(name: String!) repeatable on FIELD_DEFINITION
+    directive @myDirective on SCHEMA
 
     directive @core(feature: String!) repeatable on SCHEMA
 
@@ -111,13 +111,13 @@ test("fromValidSDLToFederatedSDL", async () => {
   ).toMatchInlineSnapshot(`
     "directive @custom on FIELD_DEFINITION
 
-    type Query {
-      me: User
-    }
-
     type User @key(fields: \\"id\\") {
       id: ID!
       username: String!
+    }
+
+    type Query {
+      me: User
     }
     "
   `);

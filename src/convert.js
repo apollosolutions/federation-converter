@@ -1,5 +1,5 @@
 import { buildSchema, GraphQLObjectType, GraphQLSchema, parse } from "graphql";
-import federation from "@apollo/federation";
+import subgraph from "@apollo/subgraph";
 import { printSchemaWithDirectives } from "@graphql-tools/utils";
 
 /**
@@ -9,26 +9,7 @@ import { printSchemaWithDirectives } from "@graphql-tools/utils";
  */
 export function fromFederatedSDLToValidSDL(sdl) {
   const parsed = parse(sdl);
-  const schema = federation.buildFederatedSchema(parsed);
-
-  // schema applied directives are lost, but we can add them back
-  const originalSchemaDirectives =
-    parsed.definitions.find(
-      /** @type {(def: any) => def is import("graphql").SchemaDefinitionNode} */
-      (def) => def.kind === "SchemaDefinition"
-    )?.directives ?? [];
-
-  schema.astNode = {
-    // satisfies the type checker
-    kind: "SchemaDefinition",
-    operationTypes: [],
-
-    ...(schema.astNode ?? {}),
-    directives: [
-      ...(schema.astNode?.directives ?? []),
-      ...originalSchemaDirectives,
-    ],
-  };
+  const schema = subgraph.buildSubgraphSchema(parsed);
 
   return printSchemaWithDirectives(schema);
 }
@@ -60,5 +41,5 @@ export function fromValidSDLToFederatedSDL(sdl) {
     types: typesWithoutQuery,
   });
 
-  return federation.printSchema(schemaWithoutFederationRootFields);
+  return subgraph.printSubgraphSchema(schemaWithoutFederationRootFields);
 }
